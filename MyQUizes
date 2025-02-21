@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+
+class MyQuizzesPage extends StatelessWidget {
+  const MyQuizzesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF1E1E1E),
+      appBar: AppBar(
+        title: const Text('My Quizzes'),
+        backgroundColor: Colors.blue.shade700,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // 2 cards per row
+            crossAxisSpacing: 12.0,
+            mainAxisSpacing: 12.0,
+            childAspectRatio: 0.8, // Adjust card height/width ratio
+          ),
+          itemCount: 7, // Number of quiz cards
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 4,
+              color: const Color(0xFF2C2C2C),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: const BorderSide(color: Color(0xFF3A3A3A), width: 1.5),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Quiz ${index + 1}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Score: ${85 + index}%',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF4CAF50),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Completed on: ${DateTime.now().subtract(Duration(days: index)).toString().split(' ')[0]}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFFB0B0B0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
